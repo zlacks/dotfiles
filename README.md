@@ -18,10 +18,6 @@ and navigation)
 
 can be easily configured to colors other than purple 
 
-### picom.conf 
-
-some tweaks to compositor to go with awesomewm theme.
-
 ### .vimrc
 
 contains plugins (managed with [vim-plug](https://github.com/junegunn/vim-plug))
@@ -44,6 +40,9 @@ fairly basic, all customization is in .bash_aliases
  
 ### .bash_aliases
 
+requires [fzf](https://github.com/junegunn/fzf), [bat](https://github.com/sharkdp/bat)
+, and [ripgrep](https://github.com/BurntSushi/ripgrep)
+
 many aliases and settings to improve terminal experience. contains `confed` and 
 `proj` autocomplete functions. use `confed` for quickly accessing important user
 and system config files. use `proj` to jump to a dir and open project files.
@@ -61,6 +60,11 @@ custom settings for rofi launcher
 ### purple.rasi (rofi)
 
 custom purple theme to match awesomewm
+
+### picom.conf 
+
+some tweaks to compositor to go with awesomewm theme.
+
 
 ### boo_berry.vim (lightline)
 
