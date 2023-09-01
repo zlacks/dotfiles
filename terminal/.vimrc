@@ -34,9 +34,6 @@ Plug 'junegunn/fzf.vim'
 " easily comment and uncomment code
 Plug 'tpope/vim-commentary'
 
-" autocompletion engine. requires additional installations
-" Plug 'ycm-core/YouCompleteMe'
-"
 call plug#end()
 
 " PLUGINS END--------
@@ -68,17 +65,20 @@ let g:lightline = {'colorscheme': 'boo_berry',}
 " THEME------------------------------------------------------
 set termguicolors
 syntax enable
-colorscheme blackboard
+"colorscheme blackboard
+"colorscheme molokai
+colorscheme sorbet
 
 " Modify certain highights to jive better with terminal background
 hi Normal guibg=NONE ctermbg=NONE
 hi CursorLine cterm=none guibg=#47345E
 hi CursorLineSign cterm=none guibg=#47345E
 hi ColorColumn guibg=#47345E
-hi LineNr cterm=none guibg=#47345E
+hi LineNr cterm=none guifg=#C7B8E0 guibg=#47345E
 hi CursorLineNr cterm=none guibg=#47345E
 hi clear SignColumn
 hi Visual guibg=#2B1C3D
+hi Comment guifg=#806B9C
 
 " MISC-------------------------------------------------------
 " activate autocomplete menu for commands. complete longest first then show
@@ -95,11 +95,6 @@ set mouse=a
 " Set mapping sequence timeout to 1s and escape sequence timeout to 25ms
 set timeoutlen=1000
 set ttimeoutlen=25
-
-" Let clangd fully control code completion
-" let g:ycm_clangd_uses_ycmd_caching = 0
-" Use installed clangd, not YCM-bundled clangd which doesn't get updates.
-" let g:ycm_clangd_binary_path = exepath("clangd")
 
 " KEY COMMANDS-----------------------------------------------
 " Removes highlighting after search by hitting return
@@ -129,6 +124,12 @@ nnoremap <leader>m :Marks<cr>
 
 " fzf show mappings
 nnoremap <leader>M :Maps<cr>
+
+" fzf show tags
+nnoremap <leader>t :Tags<cr>
+
+" fzf show tags
+nnoremap <leader>T :BTags<cr>
 
 " reload source
 nnoremap <F2> :so $MYVIMRC<cr>
