@@ -105,7 +105,7 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " remap expand region to 'v' and shrink to ctrl-v
 map v <Plug>(expand_region_expand)
-map <c-v> <Plug>(expand_region_shrink)
+map V <Plug>(expand_region_shrink)
 
 " fzf list open buffers
 nnoremap <leader>b :Buffer<cr>
@@ -151,6 +151,3 @@ inoremap <silent><c-o> <esc>O
 " remap REDO to something more sensible
 nnoremap U <c-r>
 
-" write and quit a little faster
-nnoremap <c-w> :w<cr>
-nnoremap <c-q> :q<cr>
