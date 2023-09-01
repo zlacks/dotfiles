@@ -39,6 +39,10 @@ and system config files. use `proj` to jump to a dir and open project files.
 
 of course, there is a custom prompt as well
 
+### config.toml (helix)
+
+basic [helix](https://helix-editor.com/) config
+
 ## desktop configs
 
 ### rc.lua (awesome window manager)

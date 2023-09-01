@@ -1,0 +1,16 @@
+theme = "boo_berry"
+
+[editor]
+bufferline = "multiple"
+color-modes = true
+rulers = [80]
+cursorline = true
+line-number = "relative"
+idle-timeout = 100
+
+[editor.statusline]
+right = ["position-percentage", "spacer", "diagnostics", "selections", "position", "file-encoding"]
+
+[editor.indent-guides]
+render = true
+character = "┊"
