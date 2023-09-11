@@ -3,7 +3,7 @@
 
 # Execute menu selection. Selection is passed back through as argument
 if [ "$1" = "Email/Calendar" ]; then
-  coproc ( firefox -url outlook.office.com/mail/ mail.google.com \
+  coproc ( firefox -url outlook.office.com/mail/ mail.google.com canvas.usask.ca\
                    -new-window calendar.google.com \
                    > /dev/null 2>&1 )
   coproc ( obsidian > /dev/null 2>&1 )
