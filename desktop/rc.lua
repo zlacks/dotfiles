@@ -325,6 +325,9 @@ globalkeys = mytable.join(
     -- select audio device
     awful.key({ modkey,           }, "a", function () awful.util.spawn("gnome-terminal -- /home/analog/bin/audio-switch") end,
               {description = "select audio device", group = "launcher"}),
+    -- Quick menu for common tasks
+    awful.key({ modkey,           }, "q", function () awful.util.spawn('rofi -show quick -modes "quick:~/.config/rofi/scripts/quick_menu.sh"') end,
+              {description = "quick menu", group = "launcher"}),
 
 
     awful.key({ modkey, "Control" }, "r", awesome.restart,
@@ -608,3 +611,4 @@ awful.spawn.with_shell("nitrogen --restore")
 awful.spawn.with_shell("flameshot")
 awful.spawn.with_shell("xss-lock -- i3lock-preset.sh")
 awful.spawn.with_shell("greenclip daemon")
+awful.spawn.with_shell("syncthingtray")

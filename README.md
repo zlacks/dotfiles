@@ -71,6 +71,13 @@ custom settings for rofi launcher
 
 custom purple theme to match awesomewm
 
+### quick_menu.sh (rofi)
+
+launch programs (or do anything scriptable) using a rofi menu.
+
+Run `rofi -show quick -modes "quick:~/.config/rofi/scripts/quick_menu.sh"` to
+activate the menu
+
 ### picom.conf 
 
 some tweaks to compositor to go with awesomewm theme.
