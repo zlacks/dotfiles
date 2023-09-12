@@ -13,7 +13,7 @@ elif [ "$1" = "Tuxworld" ]; then
   exit 0
 elif [ "$1" = "Notes" ]; then
   coproc ( obsidian > /dev/null 2>&1 )
-  coproc ( gnome-terminal -- sh -c "bash -c \"cd Vault; hx *; exec bash\"" )
+  coproc ( gnome-terminal -- sh -c "bash -c \"cd Vault; helix *; exec bash\"" )
 fi
 
 # Menu options
