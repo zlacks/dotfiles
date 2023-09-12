@@ -97,6 +97,8 @@ confed(){
     hx ~/.config/rofi/config.rasi
   elif [ "$1" = "rofi-theme" ]; then
     hx ~/.config/rofi/purple.rasi
+  elif [ "$1" = "rofi-quick" ]; then
+    hx ~/.config/rofi/scripts/quick_menu.sh
   elif [ "$1" = "vim" ]; then
     vim ~/.vimrc
   elif [ "$1" = "retroarch" ]; then
@@ -109,7 +111,7 @@ confed(){
 # Autocomplete for confed
 _confed_complete(){
   # list of options
-  local options="awesome picom tmux bash bash-aliases ssh sshd fstab i3lock rofi rofi-theme vim retroarch pacman"
+  local options="awesome picom tmux bash bash-aliases ssh sshd fstab i3lock rofi rofi-theme rofi-quick vim retroarch pacman"
 
   # current word being complete (stock bash completion)
   local current_word="${COMP_WORDS[COMP_CWORD]}"
@@ -122,10 +124,10 @@ complete -F _confed_complete confed
 # Open a currently in progress project
 proj(){
   if [ "$1" = "cmpt332" ]; then
-    cd ~/Repos/cmpt332/a1/
-    hx Makefile *.c *.h *.bash
+    cd ~/Repos/cmpt332/a1/ || exit 1
+    hx Makefile ./*.c ./*.h ./*.bash
   elif [ "$1" = "xv6-a1" ]; then
-    cd ~/Repos/cmpt332/xv6/
+    cd ~/Repos/cmpt332/xv6/ || exit 1
     vim Makefile kernel/syscall.* proc.* sysproc.c defs.h types.h param.h
   fi
 }
