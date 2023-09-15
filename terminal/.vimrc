@@ -99,6 +99,9 @@ set mouse=a
 set timeoutlen=1000
 set ttimeoutlen=25
 
+" Use supertab 'context' mode as default mode
+let g:SuperTabDefaultCompletionType = "context"
+
 " KEY COMMANDS-----------------------------------------------
 " Removes highlighting after search by hitting return
 nnoremap <silent><CR> :noh<CR><CR>
