@@ -34,6 +34,9 @@ Plug 'junegunn/fzf.vim'
 " easily comment and uncomment code
 Plug 'tpope/vim-commentary'
 
+" intermediate autocomplete (not IDE style, but pretty good and lightweight) 
+Plug 'ervandew/supertab'
+
 call plug#end()
 
 " PLUGINS END--------
