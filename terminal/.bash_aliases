@@ -73,45 +73,35 @@ _fzf_setup_completion path vlc
 #  FUNCTIONS  #
 ###############
 
+#
 # Quickly edit config files.
+#
+declare -A configs
+configs[awesome]="helix ~/.config/awesome/rc.lua ~/.config/awesome/theme.lua"
+configs[picom]="vim ~/.config/picom/picom.conf"
+configs[tmux]="vim ~/.tmux.conf"
+configs[bash]="helix ~/.bashrc"
+configs[bash_aliases]="helix ~/.bash_aliases"
+configs[ssh]="helix ~/.ssh/config"
+configs[sshd]="sudo vim /etc/ssh/sshd_config"
+configs[fstab]="sudo vim /etc/fstab"
+configs[i3lock]="sudoedit /bin/i3lock-preset.sh"
+configs[rofi]="helix ~/.config/rofi/config.rasi"
+configs[rofi-theme]="helix ~/.config/rofi/purple.rasi"
+configs[rofi-quick]="helix ~/.config/rofi/scripts/quick_menu.sh"
+configs[vim]="vim ~/.vimrc"
+configs[retroarch]="vim ~/.config/retroarch/retroarch.cfg"
+configs[pacman]="sudo vim /etc/pacman.conf"
+
 confed(){
-  if [ "$1" = "awesome" ]; then
-    hx ~/.config/awesome/rc.lua ~/.config/awesome/theme.lua
-  elif [ "$1" = "picom" ]; then
-    vim ~/.config/picom/picom.conf
-  elif [ "$1" = "tmux" ]; then
-    vim ~/.tmux.conf
-  elif [ "$1" = "bash" ]; then
-    hx ~/.bashrc
-  elif [ "$1" = "bash-aliases" ]; then
-    hx ~/.bash_aliases
-  elif [ "$1" = "ssh" ]; then
-    hx ~/.ssh/config
-  elif [ "$1" = "sshd" ]; then
-    sudo vim /etc/ssh/sshd_config
-  elif [ "$1" = "fstab" ]; then
-    sudo vim /etc/fstab
-  elif [ "$1" = "i3lock" ]; then
-    sudoedit /bin/i3lock-preset.sh
-  elif [ "$1" = "rofi" ]; then
-    hx ~/.config/rofi/config.rasi
-  elif [ "$1" = "rofi-theme" ]; then
-    hx ~/.config/rofi/purple.rasi
-  elif [ "$1" = "rofi-quick" ]; then
-    hx ~/.config/rofi/scripts/quick_menu.sh
-  elif [ "$1" = "vim" ]; then
-    vim ~/.vimrc
-  elif [ "$1" = "retroarch" ]; then
-    vim ~/.config/retroarch/retroarch.cfg
-  elif [ "$1" = "pacman" ]; then
-    sudo vim /etc/pacman.conf
-  fi  
+  # If key exists, run command stored in key
+  [ "${configs[$1]+a}" ] && ${configs[$1]}
 }
 
 # Autocomplete for confed
 _confed_complete(){
   # list of options
-  local options="awesome picom tmux bash bash-aliases ssh sshd fstab i3lock rofi rofi-theme rofi-quick vim retroarch pacman"
+  local options="${!configs[*]}"
 
   # current word being complete (stock bash completion)
   local current_word="${COMP_WORDS[COMP_CWORD]}"
@@ -121,7 +111,36 @@ _confed_complete(){
 }
 complete -F _confed_complete confed
 
+#
+# jump to a hotspot
+#
+declare -A jumplist
+jumplist[cmpt353]="cd /home/analog/Sync/cmpt353/a2/docker"
+jumplist[cmpt332]="cd /home/analog/Sync/cmpt332/a1-final"
+jumplist[cmpt381]="cd /home/analog/Sync/cmpt381/a2"
+jumplist[dotfiles]="cd /home/analog/Repos/dotfiles"
+
+jump(){
+  # If key exists, run command stored in key
+  [ "${jumplist[$1]+a}" ] && ${jumplist[$1]}
+}
+
+# Autocomplete for jump
+_jump_complete(){
+  # list of options
+  local options="${!jumplist[*]}"
+
+  # current word being complete (stock bash completion)
+  local current_word="${COMP_WORDS[COMP_CWORD]}"
+
+  # create list of possible matches and store to ${COMPREPLY[@]}
+  COMPREPLY=($(compgen -W "${options}" -- "$current_word"))
+}
+complete -F _jump_complete jump
+
+#
 # Open a currently in progress project
+#
 proj(){
   if [ "$1" = "cmpt332" ]; then
     cd ~/Repos/cmpt332/a1/ || exit 1
@@ -144,6 +163,39 @@ _proj_complete(){
 }
 complete -F _proj_complete proj
 
+#
+# Spin up a docker container and attach.
+#
+dk(){
+  if [ $# -eq 0 ]; then
+    docker compose up -d
+    CONTAINER=$(docker ps -l | tail -n 1 \
+      | awk -F '[[:space:]][[:space:]]+' '{print $7;}')
+    docker attach "$CONTAINER"    
+  elif [ "$1" = "fresh" ]; then
+    docker compose build --no-cache
+    docker compose up -d
+    CONTAINER=$(docker ps -l | tail -n 1 \
+      | awk -F '[[:space:]][[:space:]]+' '{print $7;}')
+    docker attach "$CONTAINER"
+  elif [ "$1" = "down" ]; then
+    docker compose down
+  elif [ "$1" = "up" ]; then
+    docker compose up -d    
+  fi
+}
+
+_dk_complete(){
+  # list of options
+  local options="fresh down up"
+
+  # current word being complete (stock bash completion)
+  local current_word="${COMP_WORDS[COMP_CWORD]}"
+
+  # create list of possible matches and store to ${COMPREPLY[@]}
+  COMPREPLY=($(compgen -W "${options}" -- "$current_word"))
+}
+complete -F _dk_complete dk
 
 ############
 #  PROMPT  #
