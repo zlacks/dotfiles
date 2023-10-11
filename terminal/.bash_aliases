@@ -77,20 +77,20 @@ _fzf_setup_completion path vlc
 # Quickly edit config files.
 #
 declare -A configs
-configs[awesome]="helix ~/.config/awesome/rc.lua ~/.config/awesome/theme.lua"
-configs[picom]="vim ~/.config/picom/picom.conf"
-configs[tmux]="vim ~/.tmux.conf"
-configs[bash]="helix ~/.bashrc"
-configs[bash_aliases]="helix ~/.bash_aliases"
-configs[ssh]="helix ~/.ssh/config"
+configs[awesome]="helix $HOME/.config/awesome/rc.lua $HOME/.config/awesome/theme.lua"
+configs[picom]="vim $HOME/.config/picom/picom.conf"
+configs[tmux]="vim $HOME/.tmux.conf"
+configs[bash]="helix $HOME/.bashrc"
+configs[bash_aliases]="helix $HOME/.bash_aliases"
+configs[ssh]="helix $HOME/.ssh/config"
 configs[sshd]="sudo vim /etc/ssh/sshd_config"
 configs[fstab]="sudo vim /etc/fstab"
 configs[i3lock]="sudoedit /bin/i3lock-preset.sh"
-configs[rofi]="helix ~/.config/rofi/config.rasi"
-configs[rofi-theme]="helix ~/.config/rofi/purple.rasi"
-configs[rofi-quick]="helix ~/.config/rofi/scripts/quick_menu.sh"
-configs[vim]="vim ~/.vimrc"
-configs[retroarch]="vim ~/.config/retroarch/retroarch.cfg"
+configs[rofi]="helix $HOME/.config/rofi/config.rasi"
+configs[rofi-theme]="helix $HOME/.config/rofi/purple.rasi"
+configs[rofi-quick]="helix $HOME/.config/rofi/scripts/quick_menu.sh"
+configs[vim]="vim $HOME/.vimrc"
+configs[retroarch]="vim $HOME/.config/retroarch/retroarch.cfg"
 configs[pacman]="sudo vim /etc/pacman.conf"
 
 confed(){
@@ -115,10 +115,10 @@ complete -F _confed_complete confed
 # jump to a hotspot
 #
 declare -A jumplist
-jumplist[cmpt353]="cd /home/analog/Sync/cmpt353/a2/docker"
-jumplist[cmpt332]="cd /home/analog/Sync/cmpt332/a1-final"
-jumplist[cmpt381]="cd /home/analog/Sync/cmpt381/a2"
-jumplist[dotfiles]="cd /home/analog/Repos/dotfiles"
+jumplist[cmpt353]="cd $HOME/Sync/cmpt353/a2/docker"
+jumplist[cmpt332]="cd $HOME/Sync/cmpt332/a1-final"
+jumplist[cmpt381]="cd $HOME/Sync/cmpt381/a2"
+jumplist[dotfiles]="cd $HOME/Repos/dotfiles"
 
 jump(){
   # If key exists, run command stored in key
