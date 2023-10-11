@@ -99,6 +99,10 @@ set mouse=a
 set timeoutlen=1000
 set ttimeoutlen=25
 
+" Buffers stay open in background when not in use (aka. hidden).
+" Allows for switching between buffers without saving first
+set hidden
+
 " Use supertab 'context' mode as default mode
 let g:SuperTabDefaultCompletionType = "context"
 
@@ -157,3 +161,6 @@ inoremap <silent><c-o> <esc>O
 " remap REDO to something more sensible
 nnoremap U <c-r>
 
+" quick move between buffers
+nnoremap <leader>n :bn<cr>
+nnoremap <leader>p :bp<cr>
