@@ -79,8 +79,8 @@ bind 'TAB:menu-complete'
 # shift-tab to cycle backwards
 bind '"\e[Z": menu-complete-backward'
 
-# display list of matches
-bind "set show-all-if-ambiguous on"
+# "find" all matches (show list like classic bash)
+bind '"\C-f": possible-completions'
 
 ###############
 #  FUNCTIONS  #
@@ -93,8 +93,8 @@ declare -A configs
 configs[awesome]="helix $HOME/.config/awesome/rc.lua $HOME/.config/awesome/theme.lua"
 configs[picom]="vim $HOME/.config/picom/picom.conf"
 configs[tmux]="vim $HOME/.tmux.conf"
-configs[bash]="helix $HOME/.bashrc"
 configs[bash_aliases]="helix $HOME/.bash_aliases"
+configs[bash]="helix $HOME/.bashrc"
 configs[ssh]="helix $HOME/.ssh/config"
 configs[sshd]="sudo vim /etc/ssh/sshd_config"
 configs[fstab]="sudo vim /etc/fstab"
@@ -107,6 +107,11 @@ configs[retroarch]="vim $HOME/.config/retroarch/retroarch.cfg"
 configs[pacman]="sudo vim /etc/pacman.conf"
 
 confed(){
+  if [ $# -ne 1 ]; then
+    printf "Possible options:\n%s\n" "${!configs[*]}" 
+    return
+  fi
+  
   # If key exists, run command stored in key
   [ "${configs[$1]+a}" ] && ${configs[$1]}
 }
