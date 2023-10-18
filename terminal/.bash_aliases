@@ -69,6 +69,19 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 # Enable "**" fuzzy autocomplete for these programs
 _fzf_setup_completion path vlc
 
+###########
+#  BINDS  #
+###########
+
+# tab cycle through completion possibilites
+bind 'TAB:menu-complete'
+
+# shift-tab to cycle backwards
+bind '"\e[Z": menu-complete-backward'
+
+# display list of matches
+bind "set show-all-if-ambiguous on"
+
 ###############
 #  FUNCTIONS  #
 ###############
@@ -115,9 +128,9 @@ complete -F _confed_complete confed
 # jump to a hotspot
 #
 declare -A jumplist
-jumplist[cmpt353]="cd $HOME/Sync/cmpt353/a2/docker"
-jumplist[cmpt332]="cd $HOME/Sync/cmpt332/a1-final"
-jumplist[cmpt381]="cd $HOME/Sync/cmpt381/a2"
+jumplist[353]="cd $HOME/Sync/cmpt353"
+jumplist[332]="cd $HOME/Sync/cmpt332"
+jumplist[381]="cd $HOME/Sync/cmpt381"
 jumplist[dotfiles]="cd $HOME/Repos/dotfiles"
 
 jump(){
