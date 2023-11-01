@@ -187,25 +187,17 @@ complete -F _proj_complete proj
 dk(){
   if [ $# -eq 0 ]; then
     docker compose up -d
-    CONTAINER=$(docker ps -l | tail -n 1 \
-      | awk -F '[[:space:]][[:space:]]+' '{print $7;}')
-    docker attach "$CONTAINER"    
   elif [ "$1" = "fresh" ]; then
     docker compose build --no-cache
     docker compose up -d
-    CONTAINER=$(docker ps -l | tail -n 1 \
-      | awk -F '[[:space:]][[:space:]]+' '{print $7;}')
-    docker attach "$CONTAINER"
   elif [ "$1" = "down" ]; then
     docker compose down
-  elif [ "$1" = "up" ]; then
-    docker compose up -d    
   fi
 }
 
 _dk_complete(){
   # list of options
-  local options="fresh down up"
+  local options="fresh down"
 
   # current word being complete (stock bash completion)
   local current_word="${COMP_WORDS[COMP_CWORD]}"
@@ -214,6 +206,26 @@ _dk_complete(){
   COMPREPLY=($(compgen -W "${options}" -- "$current_word"))
 }
 complete -F _dk_complete dk
+
+# Copy absolute file path to clipboard
+cpypath(){
+  if [ $# -eq 0 ]; then
+    printf "Usage: cpypath <file/dir names ...>\n"
+    return 1
+  fi
+
+  for file in "$@"; do
+    if [ ! -e "$file" ]; then
+      printf "\"%s\" does not exist! Not copied to clipboard\n" "$file"
+      continue
+    fi
+
+    abspath=$(readlink -f "$file")
+    xclip -selection clipboard <<< "$abspath"
+    printf "Copied \"%s\" to clipboard!\n" "$abspath"
+    sleep 0.5s
+  done
+}
 
 ############
 #  PROMPT  #
