@@ -9,11 +9,17 @@ if [ "$1" = "Email/Calendar" ]; then
   coproc ( obsidian > /dev/null 2>&1 )
   exit 0  
 elif [ "$1" = "Tuxworld" ]; then
-  coproc  ( gnome-terminal -- sh -c "bash -c \"ssh tux; exec bash\"" )
+  coproc  ( gnome-terminal -- sh -c "bash -c \"ssh tux6; exec bash\"" )
   exit 0
 elif [ "$1" = "Notes" ]; then
   coproc ( obsidian > /dev/null 2>&1 )
   coproc ( gnome-terminal -- sh -c "bash -c \"cd Vault; helix *; exec bash\"" )
+  exit 0
+elif [ "$1" = "Movies" ]; then
+  coproc ( gnome-terminal -- sh -c "bash -c \"cd Movies; \
+                  /home/analog/.fzf/bin/fzf \
+                  --bind 'enter:become(vlc {+}),ctrl-i:become(cvlc {+})' \
+                  --header '/ ENTER (vlc) / CTRL-I (vlc - no interface) /';\"" )
   exit 0
 fi
 
@@ -21,3 +27,4 @@ fi
 echo "Email/Calendar"
 echo "Tuxworld"
 echo "Notes"
+echo "Movies"

@@ -90,7 +90,7 @@ bind '"\C-f": possible-completions'
 # Quickly edit config files.
 #
 declare -A configs
-configs[awesome]="helix $HOME/.config/awesome/rc.lua $HOME/.config/awesome/theme.lua"
+configs[awesome]="helix $HOME/.config/awesome/rc.lua $HOME/.config/awesome/theme.lua $HOME/.config/awesome/autorun.sh"
 configs[picom]="vim $HOME/.config/picom/picom.conf"
 configs[tmux]="vim $HOME/.tmux.conf"
 configs[bash_aliases]="helix $HOME/.bash_aliases"
@@ -137,14 +137,16 @@ jumplist[353]="cd $HOME/Sync/cmpt353"
 jumplist[332]="cd $HOME/Sync/cmpt332"
 jumplist[381]="cd $HOME/Sync/cmpt381"
 jumplist[dotfiles]="cd $HOME/Repos/dotfiles"
+jumplist[advent]="cd $HOME/Sync/advent2023"
+jumplist[hypno]="cd $HOME/Sync/hypnobabies"
 
-jump(){
+j(){
   # If key exists, run command stored in key
   [ "${jumplist[$1]+a}" ] && ${jumplist[$1]}
 }
 
 # Autocomplete for jump
-_jump_complete(){
+_j_complete(){
   # list of options
   local options="${!jumplist[*]}"
 
@@ -154,7 +156,7 @@ _jump_complete(){
   # create list of possible matches and store to ${COMPREPLY[@]}
   COMPREPLY=($(compgen -W "${options}" -- "$current_word"))
 }
-complete -F _jump_complete jump
+complete -F _j_complete j
 
 #
 # Open a currently in progress project
@@ -188,6 +190,7 @@ dk(){
   if [ $# -eq 0 ]; then
     docker compose up -d
   elif [ "$1" = "fresh" ]; then
+    docker compose down
     docker compose build --no-cache
     docker compose up -d
   elif [ "$1" = "down" ]; then
